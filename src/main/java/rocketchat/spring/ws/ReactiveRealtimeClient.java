@@ -60,6 +60,11 @@ abstract class ReactiveRealtimeClient implements RealtimeClient, WebSocketCallba
    */
   private AtomicBoolean connected = new AtomicBoolean(false);
 
+  /*
+   * 重试连接次数
+   * */
+  private int retryConnectCount = 0;
+
   ReactiveRealtimeClient(WebSocketClient webSocketClient,
                          ClientProperties properties,
                          ConfigurableApplicationContext context,
@@ -121,6 +126,7 @@ abstract class ReactiveRealtimeClient implements RealtimeClient, WebSocketCallba
 
   @Override
   public void connected(String sessionId) {
+    retryConnectCount = 0;
     connected.set(true);
 
     messageHandlerService = this.executorFactory.create();
@@ -191,7 +197,14 @@ abstract class ReactiveRealtimeClient implements RealtimeClient, WebSocketCallba
       messageHandlerService.shutdownNow();
     }
 
-    context.close(); //closing ApplicationContext which usually should stop the Spring application
+    //try reconnect
+    log.info("retryConnectCount:" + retryConnectCount);
+    if (retryConnectCount <= 5) {
+      retryConnectCount ++ ;
+      start();
+    } else
+
+      context.close(); //closing ApplicationContext which usually should stop the Spring application
   }
 
 
