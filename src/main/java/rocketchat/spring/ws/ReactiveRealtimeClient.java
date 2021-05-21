@@ -198,13 +198,13 @@ abstract class ReactiveRealtimeClient implements RealtimeClient, WebSocketCallba
     }
 
     //try reconnect
-    log.info("retryConnectCount:" + retryConnectCount);
-    if (retryConnectCount <= 5) {
-      retryConnectCount ++ ;
-      start();
-    } else
-
-      context.close(); //closing ApplicationContext which usually should stop the Spring application
+//    log.info("retryConnectCount:" + retryConnectCount);
+//    if (retryConnectCount <= 5) {
+//      retryConnectCount ++ ;
+//      start();
+//    } else
+//
+//      context.close(); //closing ApplicationContext which usually should stop the Spring application
   }
 
 
