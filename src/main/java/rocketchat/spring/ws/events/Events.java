@@ -31,6 +31,7 @@ public class Events {
             final MessageEvent.Builder builder = new MessageEvent.Builder()
                 .roomId(msgArgs.get("rid").asText())
                 .message(msgArgs.get("msg").asText())
+                .messageId(msgArgs.get("_id").asText())
                 .user(new MessageEvent.User(
                     getText(msgArgs.get("u"), "username"),
                     getText(msgArgs.get("u"), "name")))

@@ -27,6 +27,7 @@ public class MessageEvent implements UserAwareEvent {
   private final String threadMessagesCount;
 
   private final String message;
+  private final String messageId;
 
   private final User user;
   private final boolean roomParticipant;
@@ -40,6 +41,7 @@ public class MessageEvent implements UserAwareEvent {
                        String threadMessageId,
                        String threadMessagesCount,
                        String message,
+                       String messageId,
                        User user,
                        boolean roomParticipant,
                        RoomType roomType,
@@ -51,6 +53,7 @@ public class MessageEvent implements UserAwareEvent {
     this.threadMessageId = threadMessageId;
     this.threadMessagesCount = threadMessagesCount;
     this.message = message;
+    this.messageId = messageId;
     this.user = user;
     this.roomParticipant = roomParticipant;
     this.roomType = roomType;
@@ -74,6 +77,10 @@ public class MessageEvent implements UserAwareEvent {
 
   public String getMessage() {
     return message;
+  }
+
+  public String getMessageId() {
+    return messageId;
   }
 
   public User getUser() {
@@ -146,6 +153,7 @@ public class MessageEvent implements UserAwareEvent {
     private String threadMessageId;
     private String threadMessagesCount;
     private String message;
+    private String messageId;
     private User user;
     private boolean roomParticipant = true;
     private RoomType roomType = RoomType.UNKNOWN;
@@ -160,6 +168,7 @@ public class MessageEvent implements UserAwareEvent {
           threadMessageId,
           threadMessagesCount,
           message,
+          messageId,
           user,
           roomParticipant,
           roomType,
@@ -186,6 +195,11 @@ public class MessageEvent implements UserAwareEvent {
 
     public Builder message(String message) {
       this.message = message;
+      return this;
+    }
+
+    public Builder messageId(String messageId) {
+      this.messageId = messageId;
       return this;
     }
 

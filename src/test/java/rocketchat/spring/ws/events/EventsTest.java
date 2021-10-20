@@ -32,6 +32,7 @@ public class EventsTest {
     assertNotNull(event);
     assertEquals("2NuH67xdSSrAE6eKumhDGoZxTDMaYJ23p5", event.getRoomId());
     assertEquals("hi", event.getMessage());
+    assertEquals("iKdK9z7PpPohrms7M", event.getMessageId());
 
     final MessageEvent.User user = event.getUser();
     assertNotNull(user);
